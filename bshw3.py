@@ -1,11 +1,31 @@
 from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 
 
 url = "http://collemc.people.si.umich.edu/data/bshw3StarterFile.html"
-html = urlopen(url).read()
+r = requests.get(url) 
+soup = BeautifulSoup(r.text, "lxml") 
+f = open("new.html", "w")
 
-soup = BeautifulSoup(html, "html.parser")
+soup_string = str(soup)
+# print (soup_string)
+f = f.write(soup_string)
+
+tags = soup.find_all("div", {"class":"menu-block-wrapper menu-block-1 menu-name-main-menu parent-mlid-0 menu-level-2"})
+
+for t in tags:
+	#if "menu__item is-leaf leaf menu-mlid" in t:
+	#print (t)
+	for i in t.find_all('li'):
+		# print (i)
+		for x in i.find_all('a'):
+			x_href = x.get("href")
+			if "student" in x_href:
+				print (x_href.replace("students", "AMAZING Student"))
+				
+
+
 # STEPS 
 # Create a similar HTML file but 
 # 1) Replace every occurrence of the word “student” with “AMAZING
@@ -16,20 +36,6 @@ soup = BeautifulSoup(html, "html.parser")
 
 # Deliverables
 # Make sure the new page is uploaded to your GitHub account.
-
-
-students = soup.find_all(class_="menu")
-print (type(students))
-
-students = soup.fina_all(class_="menu__item is-lead first lead menu-mlid")
-
-for header in students:
-	for x in header.find_all('a'):
-		print (header)
-		# if "Student" in x.get('href'):
-
-
-
 
 
 
