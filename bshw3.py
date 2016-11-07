@@ -23,7 +23,6 @@ print (type(students))
 
 students = soup.fina_all(class_="menu__item is-lead first lead menu-mlid")
 
-for header in students;
 for header in students:
 	for x in header.find_all('a'):
 		print (header)
