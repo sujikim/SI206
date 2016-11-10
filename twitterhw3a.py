@@ -5,8 +5,7 @@
 # You will demo this live for grading.
 
 import tweepy 
-
-from TwitterAPI import requests
+import requests
 
 # Unique code from Twitter
 access_token = "719012456849391618-ij1fpXyXaVgj8Q1fSCf6qJdVh0P9F1p"
@@ -18,14 +17,6 @@ auth = tweepy.OAuthHandler(consumer_key,consumer_secret)
 auth.set_access_token(access_token,access_token_secret)
 
 api = tweepy.API(auth)
+my_img = "samoyed-puppy-01.jpg"
 
-file = open('samoyed-dog-hereditary-health-and-health-testing-55015c6bb5bda.jpg', 'rb')
-data = file.read()
-r = api.request('statuses/update_with_media', {'status':'my favorite dog!!'}, {'media[]':data})
-print(r.status_code)
-
-
-
-print("""No output necessary although you 
-	can print out a success/failure message if you want to.""")
-
+api.update_with_media(my_img, status = "#UMSI-206 should bring in Samoyed puppies after the #Proj3 deadline!")
