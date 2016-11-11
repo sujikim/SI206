@@ -20,7 +20,7 @@ pretty_soup = pretty_soup.replace("student", "AMAZING student")
 
 
 #Replacing the main picture with a picture of myself
-pretty_soup = pretty_soup.replace("https://testbed.files.wordpress.com/2012/09/bsi_exposition_041316_192.jpg", "https://scontent-ort2-1.xx.fbcdn.net/v/t1.0-9/10606355_10204523753278957_870926521847870674_n.jpg?oh=7885a71d4f89598c26e881cf8dc0b406&oe=5899602C")
+pretty_soup = pretty_soup.replace("https://testbed.files.wordpress.com/2012/09/bsi_exposition_041316_192.jpg", "suji.jpg")
 
 
 #Replacing any local image with the image provided
