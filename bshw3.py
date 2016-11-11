@@ -1,29 +1,34 @@
+from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import requests
-from bs4 import BeautifulSoup
 
 
+#Making a request to Colleen's UMSI website
 url = "http://collemc.people.si.umich.edu/data/bshw3StarterFile.html"
 r = requests.get(url) 
+#Using BeautifulSoup to turn the requested data into a soup object
 soup = BeautifulSoup(r.text, "lxml") 
+#Creating my own html file
 f = open("new.html", "w")
 
-soup_string = str(soup)
-# print (soup_string)
-f = f.write(soup_string)
+#Turning the html file into string format
+pretty_soup = soup.prettify()
 
-tags = soup.find_all("div", {"class":"menu-block-wrapper menu-block-1 menu-name-main-menu parent-mlid-0 menu-level-2"})
+#Replacing all occurences of the word "student" with "AMAZING student"
+pretty_soup = pretty_soup.replace("student", "AMAZING student")
 
-for t in tags:
-	#if "menu__item is-leaf leaf menu-mlid" in t:
-	#print (t)
-	for i in t.find_all('li'):
-		# print (i)
-		for x in i.find_all('a'):
-			x_href = x.get("href")
-			if "student" in x_href:
-				print (x_href.replace("students", "AMAZING Student"))
-				
+
+
+#Replacing the main picture with a picture of myself
+pretty_soup = pretty_soup.replace("https://testbed.files.wordpress.com/2012/09/bsi_exposition_041316_192.jpg", "https://scontent-ort2-1.xx.fbcdn.net/v/t1.0-9/10606355_10204523753278957_870926521847870674_n.jpg?oh=7885a71d4f89598c26e881cf8dc0b406&oe=5899602C")
+
+
+#Replacing any local image with the image provided
+pretty_soup = pretty_soup.replace("logo2.png", "logo.png")
+
+
+#Making the html file reflect the changes on my website
+f.write(pretty_soup)				
 
 
 # STEPS 

@@ -1,32 +1,42 @@
+import nltk
+import random
 from nltk.book import text2
 
+nltk.download('punkt')
+
+from nltk import word_tokenize,sent_tokenize
+
+debug = False #True
+
+if debug:
+	print ("Getting information from file madlib_test.txt...\n")
+
+#Using only the first 150 tokens of text2
+tokens = text2[:150]
+print("TOKENS")
+print(tokens)
+tagged_tokens = nltk.pos_tag(tokens) # gives us a tagged list of tuples
+
+#Choosing the 5 parts of speech to prompt for, including nouns
+tagmap = {"NN":"a noun","NNS":"a plural noun","VB":"a verb","JJ":"an adjective"}
+#Replacing nouns 15% of the time, everything else 10%
+substitution_probabilities = {"NN":.15,"NNS":.10,"VB":.10,"JJ":.10}
 
 
-# Requirements:
-# 1) Only use the first 150 tokens
-# 2) Pick 5 parts of speech to prompt for, including nouns
-# 3) Replace nouns 15% of the time, everything else 10%
+def spaced(word):
+	if word in [",", ".", "?", "!", ":"]:
+		return word
+	else:
+		return " " + word
 
-# Deliverables:
-# 1) Print the orginal text (150 tokens)
-# 1) Print the new text
-print("START*******")
+final_words = []
 
 
-print("\n\nEND*******")
-from nltk.book import *
-from nltk import bigrams
-print(text1)
-print(text2)
+for (word, tag) in tagged_tokens:
+	if tag not in substitution_probabilities or random.random() > substitution_probabilities[tag]:
+		final_words.append(spaced(word))
+	else:
+		new_word = input("Please enter %s:\n" % (tagmap[tag]))
+		final_words.append(spaced(new_word))
 
-# print ("\n\n")
-# print ("Length of ",text1,"is",len(text1))
-# print ("Length of ", text2,"is",len(text2))
-# print ("Unique tokens in", text1, " are: ", len(set(text1)))
-# print ("Unique tokens in", text2, " are: ", len(set(text2)))
-
-# print ("\n\nList of unique words")
-
-# print (sorted(set(text2))[:15])
-# print (sorted(set(text2), reverse = True) [:15])
-
+print ("".join(final_words))
