@@ -18,9 +18,9 @@ print(tokens)
 tagged_tokens = nltk.pos_tag(tokens) # gives us a tagged list of tuples
 
 #Choosing the 5 parts of speech to prompt for, including nouns
-tagmap = {"NN":"a noun","NNS":"a plural noun","VB":"a verb","JJ":"an adjective"}
+tagmap = {"NN":"a noun","NNS":"a plural noun","VB":"a verb","JJ":"an adjective", "NNP": "a proper noun"}
 #Replacing nouns 15% of the time, everything else 10%
-substitution_probabilities = {"NN":.15,"NNS":.10,"VB":.10,"JJ":.10}
+substitution_probabilities = {"NN":.15,"NNS":.10,"VB":.10,"JJ":.10, "NNP": .10}
 
 
 def spaced(word):
