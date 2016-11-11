@@ -12,10 +12,7 @@ from textblob import TextBlob
 import sys 
 
 # Unique code from Twitter
-access_token = "719012456849391618-ij1fpXyXaVgj8Q1fSCf6qJdVh0P9F1p"
-access_token_secret = "dL6f1C79iKxihKRethnF95Qd1a7mxlyY30xKQvbquuV6C"
-consumer_key = "5CZBJ3KoczmIavmP5kYXCnhLO"
-consumer_secret = "XcAwYn51YR9RSGb816JCNjVovU1eExP2kvZs2cINSHTaG32D54"
+
 
 # Boilerplate code here
 auth = tweepy.OAuthHandler(consumer_key,consumer_secret)
